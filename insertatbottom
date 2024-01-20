@@ -1,0 +1,49 @@
+void insertatbttom(stack<int>&st,int size,int data){
+  if(st.empty() || size==0){
+    st.push(data);
+    return;
+  }
+
+  int temp = st.top();
+  st.pop();
+
+  insertatbttom(st,size-1,data);
+
+  st.push(temp);
+
+  
+
+}
+int main(){
+  stack<int>st;
+  st.push(3);
+  st.push(4);
+  st.push(5);
+  st.push(6);
+  st.push(5);
+
+  // int size = st.size();
+  
+  // if(size%2==0){
+  //   size = size/2;
+  // }
+  // else{
+  //   size = (size/2) + 1;
+  // }
+  // insertMiddle(st,size);
+  int size = st.size();
+  
+  insertatbttom(st,size,400);
+  while(!st.empty()){
+    cout<<st.top()<<" ";
+    st.pop();
+  }
+  cout<<endl;
+
+
+
+
+  
+  
+
+}
