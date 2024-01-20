@@ -1,0 +1,54 @@
+void reveseStack(stack<int>&st){
+  if(st.empty()){
+    return;
+  }
+
+  int temp = st.top();
+  st.pop();
+
+  reveseStack(st);
+
+  insertatbttom(st,st.size(),temp);
+}
+int main(){
+  stack<int>st;
+  st.push(3);
+  st.push(4);
+  st.push(5);
+  st.push(6);
+  st.push(5);
+
+  // int size = st.size();
+  
+  // if(size%2==0){
+  //   size = size/2;
+  // }
+  // else{
+  //   size = (size/2) + 1;
+  // }
+  // insertMiddle(st,size);
+  // int size = st.size();
+  
+  // insertatbttom(st,size,400);
+  // cout<<"before reverse :"<<endl;
+  // while(!st.empty()){
+  //   cout<<st.top()<<" ";
+  //   st.pop();
+  // }
+  // // cout<<endl;
+  reveseStack(st);
+  cout<<"after reverse :"<<endl;
+  while(!st.empty()){
+    cout<<st.top()<<" ";
+    st.pop();
+  }
+
+
+
+
+
+
+  
+  
+
+}
