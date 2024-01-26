@@ -1,0 +1,75 @@
+#include <iostream>
+using namespace std;
+
+class Nstacks{
+  public:
+  int * arr ,  *top ,  *next;
+  int n;
+  int size;
+  int freespot;
+
+  Nstacks(int _n , int _s) : n(_n),size(_s){
+    arr = new int[size];
+    top = new int[n];
+    next = new int[size];
+      for(int i=0;i<n;i++){
+    top[i] =-1;
+  }
+  for(int i=0;i<size;i++){
+    next[i] = i+1;
+  }
+  next[size-1] = -1;
+}
+
+
+  bool push(int X ,int m){
+    if(freespot == -1){
+    return false;
+    }
+    //find index
+    int index =  freespot;
+
+    //find freespot 
+    freespot = next[index];
+
+    //insert
+
+    arr[index] = X;
+
+    //update next
+
+    next[index] = top[m-1];
+
+    //udate top;
+    top[m-1] = index;
+
+    return true;
+
+  }
+
+  int  pop(int m){
+    if(top[m-1] == -1){
+      return -1;
+   }
+
+   int index = top[m-1];
+   top[m-1] = next[index];
+   int poppedEle = arr[index];
+   next[index] = freespot;
+   freespot = index;
+   return poppedEle;
+  }
+
+  ~Nstacks(){
+    delete[] arr;
+    delete[] top;
+    delete[] next;
+  }
+
+};
+int main() {
+Nstacks s(3,6);
+cout<<"pushed elements ans :"<<s.push(11,1)<<endl;
+cout<<"popped element :"<<s.pop(1)<<endl;
+
+}
