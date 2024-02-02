@@ -1,0 +1,39 @@
+class Solution {
+public:
+    std::vector<int> asteroidCollision(std::vector<int>& asteroids) {
+        std::stack<int> st;
+        for (int i = 0; i < asteroids.size(); ++i) {
+            int cur = asteroids[i];
+            bool exploded = false;
+
+            // Check for collisions and update the stack accordingly
+            while (!st.empty() && cur < 0 && st.top() > 0) {
+                int top = st.top();
+                st.pop();
+
+                // Determine which asteroid explodes
+                if (std::abs(top) == std::abs(cur)) {
+                    exploded = true;
+                    break; // Both asteroids explode
+                } else if (std::abs(top) > std::abs(cur)) {
+                    st.push(top);
+                    exploded = true;
+                    break; // The current asteroid explodes
+                }
+            }
+
+            if (!exploded) {
+                st.push(cur);
+            }
+        }
+
+        // Convert the stack to a vector
+        std::vector<int> result(st.size());
+        for (int i = result.size() - 1; i >= 0; --i) {
+            result[i] = st.top();
+            st.pop();
+        }
+
+        return result;
+    }
+};
